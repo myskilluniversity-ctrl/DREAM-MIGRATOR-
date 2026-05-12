@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Dream Migrator",
+  "description": "Dream Migrator is your trusted companion for studying abroad. Get expert counseling, IELTS prep, and visa assistance tailored for your success.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "AI Eligibility Checker",
+    "Real-time Truth Dashboard",
+    "Structured Journey Visualization"
+  ]
+}
