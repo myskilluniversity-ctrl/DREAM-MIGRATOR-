@@ -110,37 +110,45 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.2 }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] bg-slate-100 group">
+              <div className="relative rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] bg-slate-100 group border-8 border-white">
                 <img 
-                  src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Medical Student Training" 
-                  className="w-full aspect-[4/5] object-cover mix-blend-multiply transition-transform duration-1000 group-hover:scale-110"
+                  src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=1000" 
+                  alt="Global Healthcare Training" 
+                  className="w-full aspect-[4/5] object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/60 via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
                 
-                {/* Floating Info Card */}
+                {/* Floating Excellence Badge */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 }}
-                  className="absolute bottom-10 left-10 right-10 bg-white/10 backdrop-blur-3xl p-8 rounded-[40px] border border-white/20 shadow-2xl"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="absolute top-10 right-10 bg-white/90 backdrop-blur-xl p-4 rounded-3xl border border-white/20 shadow-2xl"
                 >
-                   <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-brand-500 rounded-2xl flex items-center justify-center shadow-lg shadow-brand-500/40">
-                         <Play className="w-6 h-6 text-slate-900 fill-slate-900" />
+                   <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
+                         <ShieldCheck className="w-6 h-6" />
                       </div>
-                      <div className="text-white font-black text-xs uppercase tracking-[0.2em] leading-tight">
-                        Watch Healthcare <br/> Training Journey
+                      <div>
+                        <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Global</div>
+                        <div className="text-slate-900 font-bold text-sm">Recognized</div>
                       </div>
                    </div>
-                   <p className="text-white/80 text-xs font-medium leading-relaxed">
-                     See how our level 4 and level 5 training transforms ambitious students into global medical professionals.
-                   </p>
                 </motion.div>
+
+                {/* Info Overlay */}
+                <div className="absolute bottom-10 left-10 right-10">
+                   <div className="inline-block px-4 py-2 bg-brand-500 text-slate-900 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+                      Enrollment Open: 2026
+                   </div>
+                   <h3 className="text-white text-2xl font-display font-black leading-tight">
+                     Professional BTEC <br/> Healthcare Certification
+                   </h3>
+                </div>
               </div>
               
               {/* Decorative elements */}
-              <div className="absolute -top-12 -right-12 w-64 h-64 bg-brand-400 rounded-full blur-[80px] opacity-20 -z-10" />
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-emerald-400 rounded-full blur-[80px] opacity-20 -z-10" />
             </motion.div>
           </div>
         </div>
