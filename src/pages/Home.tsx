@@ -35,8 +35,8 @@ export default function Home() {
     >
       <SEO 
         title="Global Healthcare Careers | Specialized Pearson BTEC Training"
-        description="Launch your international healthcare career with our exclusive Pearson BTEC level 3 healthcare training. Recognized in 70+ countries. Bridge the gap to global medical opportunities."
-        keywords="healthcare career, Pearson BTEC, level 3 healthcare, medical study abroad, global healthcare training, nursing careers abroad, healthcare migration"
+        description="Launch your international healthcare career with our Pearson BTEC level 4 and level 5 healthcare training. Recognized in 70+ countries. Bridge the gap to global medical opportunities."
+        keywords="healthcare career, Pearson BTEC, level 4 and level 5 healthcare, medical study abroad, global healthcare training, nursing careers abroad, healthcare migration"
       />
       {/* Hero Section */}
       <section className="relative min-h-[95vh] flex items-center pt-24 overflow-hidden bg-white">
@@ -62,7 +62,7 @@ export default function Home() {
                 <span className="text-emerald-600">Healthcare</span> Training
               </h1>
               <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-medium">
-                Launch your medical career in 70+ countries with our level 3 healthcare training. Exclusive <span className="text-slate-900 font-bold underline decoration-brand-500 underline-offset-4">Pearson BTEC Partnership</span> for future medical leaders.
+                Launch your medical career in 70+ countries with our level 4 and level 5 healthcare training. <span className="text-slate-900 font-bold underline decoration-brand-500 underline-offset-4">Pearson BTEC Partnership</span> for future medical leaders.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -134,7 +134,7 @@ export default function Home() {
                       </div>
                    </div>
                    <p className="text-white/80 text-xs font-medium leading-relaxed">
-                     See how our level 3 training transforms ambitious students into global medical professionals.
+                     See how our level 4 and level 5 training transforms ambitious students into global medical professionals.
                    </p>
                 </motion.div>
               </div>
@@ -169,7 +169,7 @@ export default function Home() {
                 <span className="text-emerald-400">Global Healthcare Gap</span>
               </h2>
               <p className="text-slate-400 text-xl font-medium mb-10 leading-relaxed max-w-xl">
-                We are dedicated to empowering the next generation of healthcare leaders. Through our exclusive Pearson BTEC partnership, we provide world-class training that opens doors to medical careers in 70+ countries.
+                We are dedicated to empowering the next generation of healthcare leaders. Through our Pearson BTEC partnership, we provide world-class training that opens doors to medical careers in 70+ countries.
               </p>
               
               <div className="grid grid-cols-2 gap-8 mb-12">
