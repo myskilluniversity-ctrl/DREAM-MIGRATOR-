@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Play, Globe2, ShieldCheck, Sparkles, MessageCircle, Bot } from 'lucide-react';
+import { ArrowRight, Play, Globe2, ShieldCheck, Sparkles, MessageCircle, Bot, HeartPulse } from 'lucide-react';
 import EligibilityChecker from '../components/EligibilityChecker';
 import DashboardMetrics from '../components/DashboardMetrics';
 import JourneyVisualization from '../components/JourneyVisualization';
@@ -34,114 +34,193 @@ export default function Home() {
       className="pt-20 bg-slate-50"
     >
       <SEO 
-        title="Your Global Education Journey"
-        description="Bridge the gap to your dream university with India's most trusted study abroad platform. Expert counseling, IELTS prep, and personalized roadmaps for students and professionals."
-        keywords="study abroad, global education, student migration, counseling, IELTS prep, university admission, Germany, UK, USA, Australia"
+        title="Global Healthcare Careers | Specialized Pearson BTEC Training"
+        description="Launch your international healthcare career with our exclusive Pearson BTEC level 3 healthcare training. Recognized in 70+ countries. Bridge the gap to global medical opportunities."
+        keywords="healthcare career, Pearson BTEC, level 3 healthcare, medical study abroad, global healthcare training, nursing careers abroad, healthcare migration"
       />
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-white">
+      <section className="relative min-h-[95vh] flex items-center pt-24 overflow-hidden bg-white">
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-50 blur-[150px] rounded-full opacity-50 -mr-96 -mt-96" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent-50 blur-[120px] rounded-full opacity-40 -ml-48 -mb-48" />
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-emerald-50 blur-[150px] rounded-full opacity-50 -mr-96 -mt-96" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-50 blur-[120px] rounded-full opacity-40 -ml-48 -mb-48" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="lg:col-span-7"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-100 border border-accent-200 text-accent-700 text-xs font-bold uppercase tracking-wider mb-6">
-                <Sparkles className="w-4 h-4" />
-                Empowering 2 Million+ Dreams
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest mb-6">
+                <HeartPulse className="w-4 h-4 animate-pulse" />
+                Global Healthcare Mission
               </div>
-              <h1 className="text-5xl md:text-7xl font-display font-black text-slate-900 leading-[1.1] mb-8">
-                Your Global Education <br/>
-                <span className="text-brand-700">Journey Starts Here</span>
+              <h1 className="text-5xl md:text-8xl font-display font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+                Master Global <br/>
+                <span className="text-emerald-600">Healthcare</span> Training
               </h1>
-              <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
-                Bridge the gap to your dream university with India's most trusted study abroad platform. Expert counseling, IELTS prep, and more.
+              <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-medium">
+                Launch your medical career in 70+ countries with our level 3 healthcare training. Exclusive <span className="text-slate-900 font-bold underline decoration-brand-500 underline-offset-4">Pearson BTEC Partnership</span> for future medical leaders.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <Link 
+                  to="/healthcare"
+                  className="px-10 py-6 bg-slate-900 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-600 transition-all shadow-2xl shadow-emerald-500/20 group"
+                >
+                  Explore Mission
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
                 <button 
                   onClick={openCounseling}
-                  className="px-8 py-5 bg-brand-500 text-slate-900 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-brand-600 transition-all shadow-xl shadow-brand-500/20"
+                  className="px-10 py-6 bg-brand-500 text-slate-900 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-brand-600 transition-all shadow-xl shadow-brand-500/10"
                 >
-                  Book Free Counseling
-                  <ArrowRight className="w-5 h-5" />
+                  Book Assessment
                 </button>
-                <Link 
-                  to="/programs"
-                  className="px-8 py-5 bg-white border-2 border-slate-200 text-slate-900 rounded-xl font-bold text-lg flex items-center justify-center hover:bg-slate-50 transition-all"
-                >
-                  Explore Programs
-                </Link>
               </div>
 
-              <div className="flex items-center gap-6">
-                <div className="flex -space-x-3">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-12 h-12 rounded-full border-4 border-white overflow-hidden shadow-sm">
-                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=user${i}`} alt="user" className="bg-slate-100" />
-                    </div>
-                  ))}
+              <div className="flex items-center gap-8 py-6 border-t border-slate-100">
+                <div className="flex items-center gap-3">
+                   <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
+                      <ShieldCheck className="w-6 h-6" />
+                   </div>
+                   <div>
+                      <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Official</div>
+                      <div className="text-slate-900 font-bold">BTEC Partner</div>
+                   </div>
                 </div>
-                <div>
-                  <div className="text-slate-900 font-bold">Excellent 4.8/5</div>
-                  <div className="text-slate-500 text-sm">Rated by 50,000+ Students</div>
+                <div className="w-px h-12 bg-slate-100" />
+                <div className="flex items-center gap-3">
+                   <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-700">
+                      <Globe2 className="w-6 h-6" />
+                   </div>
+                   <div>
+                      <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Recognition</div>
+                      <div className="text-slate-900 font-bold">70+ Countries</div>
+                   </div>
                 </div>
               </div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.95, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative rounded-[32px] overflow-hidden shadow-2xl border-[12px] border-white rotate-2 hover:rotate-0 transition-transform duration-500">
+              <div className="relative rounded-[60px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] bg-slate-100 group">
                 <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Student group" 
-                  className="w-full aspect-[4/5] object-cover"
+                  src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1000" 
+                  alt="Medical Student Training" 
+                  className="w-full aspect-[4/5] object-cover mix-blend-multiply transition-transform duration-1000 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8 text-white">
-                  <div className="text-2xl font-bold mb-1">Meet our Alumni</div>
-                  <div className="text-sm opacity-90">Studying in top universities worldwide</div>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/60 via-transparent to-transparent opacity-60" />
+                
+                {/* Floating Info Card */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 }}
+                  className="absolute bottom-10 left-10 right-10 bg-white/10 backdrop-blur-3xl p-8 rounded-[40px] border border-white/20 shadow-2xl"
+                >
+                   <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-brand-500 rounded-2xl flex items-center justify-center shadow-lg shadow-brand-500/40">
+                         <Play className="w-6 h-6 text-slate-900 fill-slate-900" />
+                      </div>
+                      <div className="text-white font-black text-xs uppercase tracking-[0.2em] leading-tight">
+                        Watch Healthcare <br/> Training Journey
+                      </div>
+                   </div>
+                   <p className="text-white/80 text-xs font-medium leading-relaxed">
+                     See how our level 3 training transforms ambitious students into global medical professionals.
+                   </p>
+                </motion.div>
               </div>
               
-              {/* Floating badges */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden md:block"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] font-bold text-slate-400 uppercase">Visa Success</div>
-                    <div className="text-lg font-black text-slate-900">99.2%</div>
-                  </div>
-                </div>
-              </motion.div>
+              {/* Decorative elements */}
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-brand-400 rounded-full blur-[80px] opacity-20 -z-10" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-              <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-6 -right-6 bg-accent-500 p-4 rounded-2xl shadow-xl border-4 border-white hidden md:block"
-              >
-                <div className="text-slate-900 font-black text-center">
-                  <div className="text-2xl">800+</div>
-                  <div className="text-[10px] uppercase tracking-tighter">Partner Universities</div>
+      {/* Healthcare Mission Section - New Strategic Highlight */}
+      <section className="py-24 relative overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000')] bg-cover opacity-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-[0.2em] mb-8">
+                <HeartPulse className="w-4 h-4" />
+                Specialized Career Path
+              </div>
+              <h2 className="text-4xl md:text-6xl font-display font-black text-white mb-8 tracking-tighter leading-tight">
+                Our Mission: Bridging the <br/>
+                <span className="text-emerald-400">Global Healthcare Gap</span>
+              </h2>
+              <p className="text-slate-400 text-xl font-medium mb-10 leading-relaxed max-w-xl">
+                We are dedicated to empowering the next generation of healthcare leaders. Through our exclusive Pearson BTEC partnership, we provide world-class training that opens doors to medical careers in 70+ countries.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-8 mb-12">
+                <div className="border-l-2 border-emerald-500 pl-6">
+                  <div className="text-3xl font-display font-black text-white mb-1">70+</div>
+                  <div className="text-slate-500 text-xs font-bold uppercase tracking-widest">Countries Recognized</div>
                 </div>
-              </motion.div>
+                <div className="border-l-2 border-emerald-500 pl-6">
+                  <div className="text-3xl font-display font-black text-white mb-1">100%</div>
+                  <div className="text-slate-500 text-xs font-bold uppercase tracking-widest">Global Standards</div>
+                </div>
+              </div>
+
+              <Link 
+                to="/healthcare"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-900 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-emerald-400 transition-all group"
+              >
+                Join the Healthcare Mission
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="bg-emerald-500/10 backdrop-blur-3xl rounded-[60px] p-8 border border-emerald-500/20">
+                <img 
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000" 
+                  alt="Medical Professional" 
+                  className="rounded-[40px] shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-700"
+                />
+                
+                {/* Floating Stats */}
+                <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-[40px] shadow-2xl border border-slate-100 max-w-xs hidden md:block">
+                  <div className="flex items-center gap-4 mb-4">
+                     <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+                        <ShieldCheck className="w-6 h-6" />
+                     </div>
+                     <div>
+                        <div className="text-slate-900 font-black">Pearson BTEC</div>
+                        <div className="text-slate-400 text-[10px] font-bold uppercase">Official Partner</div>
+                     </div>
+                  </div>
+                  <p className="text-slate-500 text-xs font-medium leading-relaxed">
+                    Qualification recognized globally by healthcare providers and academic institutions.
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
