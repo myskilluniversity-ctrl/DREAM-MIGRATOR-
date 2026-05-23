@@ -10,7 +10,8 @@ import {
   ChevronRight,
   Menu,
   X,
-  Plus
+  Plus,
+  Globe
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
@@ -49,6 +50,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { label: 'Leads Management', icon: Users, path: '/admin' },
     { label: 'Financial Records', icon: CreditCard, path: '/admin/finances' },
     { label: 'Market Analytics', icon: BarChart3, path: '/admin/analytics' },
+    { label: 'SEO & Content Master', icon: Globe, path: '/admin/seo' },
     { label: 'System Settings', icon: Settings, path: '/admin/settings' },
   ];
 

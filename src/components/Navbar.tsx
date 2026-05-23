@@ -52,6 +52,7 @@ export default function Navbar() {
     {
       name: 'Resources',
       links: [
+        { name: 'Migration Insights (Blog)', path: '/blog' },
         { name: 'Guides & PDFs', path: '/resources' },
         { name: 'FAQ', path: '/faq' },
         { name: 'Our Team', path: '/team' },

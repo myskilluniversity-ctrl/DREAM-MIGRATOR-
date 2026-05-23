@@ -16,6 +16,8 @@ import Healthcare from './pages/Healthcare';
 import OpportunityCard from './pages/OpportunityCard';
 import Ausbildung from './pages/Ausbildung';
 import Resources from './pages/Resources';
+import BlogList from './pages/BlogList';
+import BlogDetail from './pages/BlogDetail';
 import Team from './pages/Team';
 import Director from './pages/Director';
 import CEO from './pages/CEO';
@@ -56,6 +58,8 @@ export default function App() {
                 <Route path="/opportunity-card" element={<OpportunityCard />} />
                 <Route path="/ausbildung" element={<Ausbildung />} />
                 <Route path="/resources" element={<Resources />} />
+                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/director" element={<Director />} />
                 <Route path="/ceo" element={<CEO />} />
@@ -74,6 +78,7 @@ export default function App() {
                 <Route path="/admin" element={<AdminLayout><AdminPanel initialTab="leads" /></AdminLayout>} />
                 <Route path="/admin/finances" element={<AdminLayout><AdminPanel initialTab="finances" /></AdminLayout>} />
                 <Route path="/admin/analytics" element={<AdminLayout><AdminPanel initialTab="analytics" /></AdminLayout>} />
+                <Route path="/admin/seo" element={<AdminLayout><AdminPanel initialTab="seo" /></AdminLayout>} />
                 <Route path="/admin/settings" element={<AdminLayout>
                   <div className="p-12 surface bg-white text-center">
                     <Settings className="w-16 h-16 text-slate-200 mx-auto mb-6" />
