@@ -156,6 +156,38 @@ export default function Login() {
                Secured Data Vault <br /> <span className="text-brand-500">Dream Migrator Platform</span>
              </p>
            </div>
+
+           {/* Quick Testing Accounts */}
+           <div className="mt-8 pt-6 border-t border-slate-100 text-left">
+             <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider block mb-3 text-center">
+               Access Testing Accounts (Role-Based)
+             </span>
+             <div className="grid grid-cols-1 gap-2">
+               {[
+                 { name: "Master Admin (Full)", email: "myskilluniversity@gmail.com", desc: "All sections unrestricted", color: "bg-red-50 text-red-700 hover:bg-red-100 border-red-200" },
+                 { name: "CRM Specialist", email: "crm_specialist@dream.com", desc: "CRM portions only (No SEO)", color: "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-200" },
+                 { name: "SEO Creator", email: "seo_editor@dream.com", desc: "SEO Content only (No CRM)", color: "bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border-indigo-200" }
+               ].map((acc) => (
+                 <button
+                   key={acc.email}
+                   type="button"
+                   onClick={() => {
+                     setFormData({ email: acc.email, password: 'password123', name: acc.name });
+                     setIsRegistering(false);
+                   }}
+                   className={`w-full text-left p-3.5 rounded-2xl border transition-all flex items-center justify-between group ${acc.color}`}
+                 >
+                   <div>
+                     <span className="text-xs font-black uppercase tracking-tight block font-display">{acc.name}</span>
+                     <span className="text-[9px] font-mono block opacity-70 mt-0.5">{acc.email}</span>
+                   </div>
+                     <span className="text-[10px] font-black uppercase tracking-wider bg-white text-slate-900 px-3 py-1 rounded-xl shadow-sm border border-black/5 group-hover:scale-105 duration-200">
+                       Auto-fill
+                     </span>
+                 </button>
+               ))}
+             </div>
+           </div>
         </div>
       </div>
     </motion.div>

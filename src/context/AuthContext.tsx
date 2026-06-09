@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 export interface UserProfile {
   uid: string;
   email: string;
-  role: 'student' | 'admin';
+  role: 'student' | 'admin' | 'crm' | 'seo';
   displayName: string;
 }
 
@@ -20,13 +20,26 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const STORAGE_KEY_AUTH = 'dream_migrator_auth';
+const STORAGE_KEY_USERS = 'dream_migrator_registered_users';
 const ADMIN_EMAIL = 'myskilluniversity@gmail.com';
+
+const DEFAULT_STAFF = [
+  { uid: 'admin-master', email: 'myskilluniversity@gmail.com', name: 'Master Admin', role: 'admin' },
+  { uid: 'staff-crm-1', email: 'crm_specialist@dream.com', name: 'CRM Specialist', role: 'crm' },
+  { uid: 'staff-seo-1', email: 'seo_editor@dream.com', name: 'SEO Content Creator', role: 'seo' }
+];
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Seed initial staff users if not present
+    const usersStore = localStorage.getItem(STORAGE_KEY_USERS);
+    if (!usersStore) {
+      localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(DEFAULT_STAFF));
+    }
+
     const stored = localStorage.getItem(STORAGE_KEY_AUTH);
     if (stored) {
       setProfile(JSON.parse(stored));
@@ -35,22 +48,55 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const loginWithEmail = async (email: string, _pass: string) => {
-    // Mock login with email
-    const mockProfile: UserProfile = {
-      uid: 'email-user-id',
-      email: email,
-      displayName: email.split('@')[0],
-      role: email === ADMIN_EMAIL ? 'admin' : 'student'
-    };
+    const usersStore = localStorage.getItem(STORAGE_KEY_USERS);
+    const users = usersStore ? JSON.parse(usersStore) : DEFAULT_STAFF;
+    
+    // Find the staff account or user
+    const matched = users.find((u: any) => u.email.toLowerCase() === email.trim().toLowerCase());
+
+    let mockProfile: UserProfile;
+    if (matched) {
+      mockProfile = {
+        uid: matched.uid || 'id-' + Math.random().toString(36).substr(2, 9),
+        email: matched.email,
+        displayName: matched.name || matched.displayName,
+        role: matched.role
+      };
+    } else {
+      mockProfile = {
+        uid: 'user-uid-' + Math.random().toString(36).substr(2, 9),
+        email: email,
+        displayName: email.split('@')[0],
+        role: email === ADMIN_EMAIL ? 'admin' : 'student'
+      };
+    }
+    
     saveAuth(mockProfile);
   };
 
   const registerWithEmail = async (email: string, _pass: string, name: string) => {
+    const usersStore = localStorage.getItem(STORAGE_KEY_USERS);
+    const users = usersStore ? JSON.parse(usersStore) : [...DEFAULT_STAFF];
+    
+    const role = email.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? 'admin' : 'student';
+    const newUid = 'user-uid-' + Math.random().toString(36).substr(2, 9);
+    
+    // Add to local registered users list if new
+    if (!users.some((u: any) => u.email.toLowerCase() === email.toLowerCase())) {
+      users.push({
+        uid: newUid,
+        email: email,
+        name: name,
+        role: role
+      });
+      localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+    }
+
     const mockProfile: UserProfile = {
-      uid: 'email-user-id',
+      uid: newUid,
       email: email,
       displayName: name,
-      role: email === ADMIN_EMAIL ? 'admin' : 'student'
+      role: role
     };
     saveAuth(mockProfile);
   };

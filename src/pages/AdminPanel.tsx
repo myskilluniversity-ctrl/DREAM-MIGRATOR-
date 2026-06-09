@@ -83,10 +83,82 @@ export default function AdminPanel({ initialTab = 'leads' }: AdminPanelProps) {
     notes: ''
   });
 
+  // Staff credentials and Section Roles state
+  const [staffList, setStaffList] = useState<any[]>([]);
+  const [newStaffForm, setNewStaffForm] = useState({ name: '', email: '', role: 'crm' });
+  const [isAddingStaff, setIsAddingStaff] = useState(false);
+
+  const fetchStaff = () => {
+    const raw = localStorage.getItem('dream_migrator_registered_users');
+    if (raw) {
+      setStaffList(JSON.parse(raw));
+    } else {
+      const initial = [
+        { uid: 'admin-master', email: 'myskilluniversity@gmail.com', name: 'Master Admin', role: 'admin' },
+        { uid: 'staff-crm-1', email: 'crm_specialist@dream.com', name: 'CRM Specialist', role: 'crm' },
+        { uid: 'staff-seo-1', email: 'seo_editor@dream.com', name: 'SEO Content Creator', role: 'seo' }
+      ];
+      localStorage.setItem('dream_migrator_registered_users', JSON.stringify(initial));
+      setStaffList(initial);
+    }
+  };
+
+  useEffect(() => {
+    fetchStaff();
+  }, [activeTab]);
+
+  const handleCreateStaff = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newStaffForm.name || !newStaffForm.email) return;
+    
+    const raw = localStorage.getItem('dream_migrator_registered_users');
+    let list = raw ? JSON.parse(raw) : [];
+    
+    const emailLower = newStaffForm.email.trim().toLowerCase();
+    
+    // Prevent duplicate email registrations
+    if (list.some((item: any) => item.email.toLowerCase() === emailLower)) {
+      alert("A staff member with this email is already registered.");
+      return;
+    }
+
+    const newStaff = {
+      uid: 'staff-created-' + Math.random().toString(36).substr(2, 9),
+      name: newStaffForm.name,
+      email: emailLower,
+      role: newStaffForm.role,
+      createdAt: new Date().toISOString()
+    };
+    
+    list.push(newStaff);
+    localStorage.setItem('dream_migrator_registered_users', JSON.stringify(list));
+    setStaffList(list);
+    setNewStaffForm({ name: '', email: '', role: 'crm' });
+    setIsAddingStaff(false);
+  };
+
+  const handleChangeStaffRole = (uid: string, newRole: string) => {
+    const raw = localStorage.getItem('dream_migrator_registered_users');
+    if (!raw) return;
+    let list = JSON.parse(raw);
+    list = list.map((item: any) => item.uid === uid ? { ...item, role: newRole } : item);
+    localStorage.setItem('dream_migrator_registered_users', JSON.stringify(list));
+    setStaffList(list);
+  };
+
+  const handleDeleteStaff = (uid: string) => {
+    const raw = localStorage.getItem('dream_migrator_registered_users');
+    if (!raw) return;
+    let list = JSON.parse(raw);
+    list = list.filter((item: any) => item.uid !== uid);
+    localStorage.setItem('dream_migrator_registered_users', JSON.stringify(list));
+    setStaffList(list);
+  };
+
 
 
   const fetchData = async () => {
-    if (profile?.role !== 'admin') return;
+    if (profile?.role !== 'admin' && profile?.role !== 'crm') return;
     
     setLoading(true);
     try {
@@ -277,13 +349,13 @@ export default function AdminPanel({ initialTab = 'leads' }: AdminPanelProps) {
     return matchesSearch && matchesFilter;
   });
 
-  if (profile?.role !== 'admin') {
+  if (!profile || (profile.role !== 'admin' && profile.role !== 'crm')) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 pt-20">
         <div className="text-center">
           <Shield className="w-16 h-16 text-slate-300 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-slate-900">Access Restricted</h2>
-          <p className="text-slate-500">Only administrators can view this panel.</p>
+          <p className="text-slate-500">Only authorized administrators or CRM Specialists can view research modules.</p>
         </div>
       </div>
     );
@@ -703,11 +775,170 @@ export default function AdminPanel({ initialTab = 'leads' }: AdminPanelProps) {
         )}
 
         {activeTab === 'users' && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="p-12 bg-white rounded-[40px] border border-slate-200 text-center">
-            <Shield className="w-16 h-16 text-slate-200 mx-auto mb-6" />
-            <h3 className="text-xl font-bold text-slate-900 mb-2">User Access Governance</h3>
-            <p className="text-slate-500 max-w-sm mx-auto font-medium mb-8">Manage team member permissions and access logs here. This module is currently under maintenance.</p>
-            <button className="px-8 py-3 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest">Connect LDAP</button>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-8 rounded-[36px] border border-slate-100 shadow-sm">
+              <div>
+                <h2 className="text-xl font-display font-black text-slate-900 uppercase tracking-tight">Staff Credentials & Section Permissions</h2>
+                <p className="text-slate-500 text-xs font-medium">As a Master Admin, you can authorize specific personnel with distinct access segments (CRM / Leads or SEO & Blog Editorial).</p>
+              </div>
+              {profile?.role === 'admin' && (
+                <button 
+                  onClick={() => setIsAddingStaff(!isAddingStaff)}
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-slate-900 border border-slate-900 text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-brand-500 hover:text-slate-900 hover:border-brand-500 transition-all shadow-sm active:scale-95 duration-200"
+                >
+                  <Plus className="w-4 h-4" />
+                  {isAddingStaff ? "Collapse Panel" : "Register Team Member"}
+                </button>
+              )}
+            </div>
+
+            {/* Quick Helper Banner */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { title: "Master Administrator", desc: "Unrestricted visibility across CRM Leads, Financial records, Analytics, SEO Master options, and Team Credential settings.", badge: "admin", color: "border-red-100 bg-red-50/50 text-red-700" },
+                { title: "CRM Specialist Segment", desc: "Confined strictly to CRM portions (Leads Dashboard, Financial audit logs, dynamic CSV Export, and Acquisition analytics). SEO section locked.", badge: "crm", color: "border-emerald-100 bg-emerald-50/50 text-emerald-700" },
+                { title: "SEO Content Creator", desc: "Confined to writing/editing blog articles, reviewing metadata, and search indexing tags. CRM logs & budgets are completely hidden & locked.", badge: "seo", color: "border-indigo-100 bg-indigo-50/50 text-indigo-700" }
+              ].map((segment, idx) => (
+                <div key={idx} className={`p-6 rounded-3xl border ${segment.color} text-left space-y-2`}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-black uppercase tracking-wider">{segment.title}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 bg-white rounded-lg shadow-sm">{segment.badge}</span>
+                  </div>
+                  <p className="text-[11px] leading-relaxed opacity-90">{segment.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Register New Staff Panel */}
+            <AnimatePresence>
+              {isAddingStaff && profile?.role === 'admin' && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm overflow-hidden"
+                >
+                  <h3 className="text-sm font-black uppercase tracking-widest text-slate-800 mb-6">Register Specific Access User</h3>
+                  <form onSubmit={handleCreateStaff} className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
+                    <div>
+                      <label className="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-2">Display Name</label>
+                      <input 
+                        required
+                        type="text"
+                        placeholder="e.g. Rahul Sharma"
+                        value={newStaffForm.name}
+                        onChange={(e) => setNewStaffForm({ ...newStaffForm, name: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 placeholder-slate-400 font-medium text-xs outline-none focus:bg-white focus:border-slate-900 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-2">Email Address</label>
+                      <input 
+                        required
+                        type="email"
+                        placeholder="e.g. rahul@dream.com"
+                        value={newStaffForm.email}
+                        onChange={(e) => setNewStaffForm({ ...newStaffForm, email: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-900 placeholder-slate-400 font-medium text-xs outline-none focus:bg-white focus:border-slate-900 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-black uppercase text-slate-400 tracking-wider mb-2">Assigned Access Level</label>
+                      <select
+                        value={newStaffForm.role}
+                        onChange={(e) => setNewStaffForm({ ...newStaffForm, role: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-bold text-xs outline-none cursor-pointer focus:bg-white focus:border-slate-900 transition-all"
+                      >
+                        <option value="crm">CRM Specialist (Leads & Metrics)</option>
+                        <option value="seo">SEO Content Creator (Blogs & Tags)</option>
+                        <option value="admin">Master Administrator (Full Access)</option>
+                      </select>
+                    </div>
+                    <button 
+                      type="submit"
+                      className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-slate-900 rounded-xl font-bold text-xs uppercase tracking-widest transition-all shadow-sm active:scale-95 duration-200"
+                    >
+                      Issue Credentials
+                    </button>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Staff list panel */}
+            <div className="bg-white rounded-[36px] border border-slate-200 overflow-hidden shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-slate-100 bg-slate-50/50">
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Team Member</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Login email</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Segment Allocation</th>
+                      {profile?.role === 'admin' && (
+                        <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {staffList.map((staff) => (
+                      <tr key={staff.uid} className="hover:bg-slate-50/50 transition-colors">
+                        <td className="px-8 py-5">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-700 text-xs uppercase border border-slate-200">
+                              {staff.name ? staff.name.charAt(0) : "U"}
+                            </div>
+                            <span className="font-bold text-slate-900 text-xs">{staff.name || 'Anonymous User'}</span>
+                          </div>
+                        </td>
+                        <td className="px-8 py-5">
+                          <span className="text-slate-400 font-mono text-xs">{staff.email}</span>
+                        </td>
+                        <td className="px-8 py-5">
+                          {profile?.role === 'admin' && staff.email !== 'myskilluniversity@gmail.com' ? (
+                            <select 
+                              value={staff.role}
+                              onChange={(e) => handleChangeStaffRole(staff.uid, e.target.value)}
+                              className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold uppercase tracking-wider outline-none cursor-pointer focus:border-slate-900 transition-all font-sans text-slate-800"
+                            >
+                              <option value="admin">Master Admin</option>
+                              <option value="crm">CRM Specialist</option>
+                              <option value="seo">SEO Content</option>
+                              <option value="student">Student Account</option>
+                            </select>
+                          ) : (
+                            <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider ${
+                              staff.role === 'admin' ? 'bg-red-50 text-red-600 border border-red-100' :
+                              staff.role === 'crm' ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' :
+                              staff.role === 'seo' ? 'bg-indigo-50 text-indigo-600 border border-indigo-100' :
+                              'bg-slate-100 text-slate-500'
+                            }`}>
+                              {staff.role === 'admin' ? 'Master Admin' :
+                               staff.role === 'crm' ? 'CRM Specialist' :
+                               staff.role === 'seo' ? 'SEO Creator' : 'Student'}
+                            </span>
+                          )}
+                        </td>
+                        {profile?.role === 'admin' && (
+                          <td className="px-8 py-5 text-right">
+                            {staff.email !== 'myskilluniversity@gmail.com' ? (
+                              <button
+                                onClick={() => handleDeleteStaff(staff.uid)}
+                                className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all"
+                                title="Revoke access logs & permissions"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            ) : (
+                              <span className="text-[10px] uppercase font-bold text-slate-300">Default Root</span>
+                            )}
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </motion.div>
         )}
 

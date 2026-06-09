@@ -80,6 +80,7 @@ export default function App() {
                 <Route path="/admin/finances" element={<AdminLayout><AdminPanel initialTab="finances" /></AdminLayout>} />
                 <Route path="/admin/analytics" element={<AdminLayout><AdminPanel initialTab="analytics" /></AdminLayout>} />
                 <Route path="/admin/seo" element={<AdminLayout><SeoPanel /></AdminLayout>} />
+                <Route path="/admin/staff" element={<AdminLayout><AdminPanel initialTab="users" /></AdminLayout>} />
                 <Route path="/admin/settings" element={<AdminLayout>
                   <div className="p-12 surface bg-white text-center">
                     <Settings className="w-16 h-16 text-slate-200 mx-auto mb-6" />
