@@ -126,10 +126,9 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
           ))}
-          
-          {user ? (
+                    {user ? (
              <div className="flex items-center gap-3">
-               {profile?.role === 'admin' && (
+               {['admin', 'crm'].includes(profile?.role || '') && (
                  <Link 
                    to="/admin"
                    className="flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-brand-500 hover:text-slate-900 transition-all shadow-md"
@@ -138,13 +137,22 @@ export default function Navbar() {
                    CRM
                  </Link>
                )}
+               {profile?.role === 'seo' && (
+                 <Link 
+                   to="/admin/seo"
+                   className="flex items-center gap-2 px-4 py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-brand-500 hover:text-slate-900 transition-all shadow-md"
+                 >
+                   <Globe className="w-4 h-4" />
+                   SEO
+                 </Link>
+               )}
                <Link 
                 to="/dashboard"
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm ${profile?.role === 'admin' ? 'bg-red-50 text-red-600 border border-red-100 hover:bg-red-100' : 'bg-brand-50 text-brand-600 border border-brand-100 hover:bg-brand-100'}`}
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm ${['admin', 'crm', 'seo'].includes(profile?.role || '') ? 'bg-red-50 text-red-600 border border-red-100 hover:bg-red-100' : 'bg-brand-50 text-brand-600 border border-brand-100 hover:bg-brand-100'}`}
                >
                   <User className="w-4 h-4" />
                   {profile?.displayName.split(' ')[0]}
-                  {profile?.role === 'admin' && <Shield className="w-3 h-3" />}
+                  {['admin', 'crm', 'seo'].includes(profile?.role || '') && <Shield className="w-3 h-3" />}
                </Link>
              </div>
           ) : (
@@ -202,13 +210,22 @@ export default function Navbar() {
               <div className="pt-4 flex flex-col gap-3">
                 {user ? (
                    <>
-                    {profile?.role === 'admin' && (
+                    {['admin', 'crm'].includes(profile?.role || '') && (
                       <Link 
                         to="/admin"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="w-full py-4 bg-slate-900 text-white rounded-xl text-center font-black uppercase tracking-widest text-sm"
                       >
                         CRM Console
+                      </Link>
+                    )}
+                    {profile?.role === 'seo' && (
+                      <Link 
+                        to="/admin/seo"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="w-full py-4 bg-slate-900 text-white rounded-xl text-center font-black uppercase tracking-widest text-sm"
+                      >
+                        SEO Workspace
                       </Link>
                     )}
                     <Link 

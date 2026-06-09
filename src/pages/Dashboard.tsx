@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
   Users, 
@@ -26,10 +26,20 @@ import SEO from '../components/SEO';
 
 export default function Dashboard() {
   const { profile, logout } = useAuth();
+  const navigate = useNavigate();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [studentTransactions, setStudentTransactions] = useState<Transaction[]>([]);
+
+  useEffect(() => {
+    if (!profile) return;
+    if (profile.role === 'admin' || profile.role === 'crm') {
+      navigate('/admin', { replace: true });
+    } else if (profile.role === 'seo') {
+      navigate('/admin/seo', { replace: true });
+    }
+  }, [profile, navigate]);
 
   useEffect(() => {
     async function fetchLeads() {
