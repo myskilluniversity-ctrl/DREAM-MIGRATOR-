@@ -32,6 +32,7 @@ import VisaPredictor from './pages/VisaPredictor';
 import ScholarshipFinder from './pages/ScholarshipFinder';
 import AICounselor from './pages/AICounselor';
 import AdminPanel from './pages/AdminPanel';
+import SeoPanel from './pages/SeoPanel';
 import AdminLayout from './layouts/AdminLayout';
 import { motion, AnimatePresence } from 'motion/react';
 import { AuthProvider } from './context/AuthContext';
@@ -78,7 +79,7 @@ export default function App() {
                 <Route path="/admin" element={<AdminLayout><AdminPanel initialTab="leads" /></AdminLayout>} />
                 <Route path="/admin/finances" element={<AdminLayout><AdminPanel initialTab="finances" /></AdminLayout>} />
                 <Route path="/admin/analytics" element={<AdminLayout><AdminPanel initialTab="analytics" /></AdminLayout>} />
-                <Route path="/admin/seo" element={<AdminLayout><AdminPanel initialTab="seo" /></AdminLayout>} />
+                <Route path="/admin/seo" element={<AdminLayout><SeoPanel /></AdminLayout>} />
                 <Route path="/admin/settings" element={<AdminLayout>
                   <div className="p-12 surface bg-white text-center">
                     <Settings className="w-16 h-16 text-slate-200 mx-auto mb-6" />
