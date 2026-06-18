@@ -29,7 +29,7 @@ export default function Healthcare() {
     >
       <SEO 
         title="Global Healthcare Practice Courses"
-        description="Launch your international healthcare career with Pearson BTEC qualifications. Recognized in UK, USA, Australia, and 70+ countries."
+        description="Launch your international healthcare career with Pearson BTEC qualifications. Recognized in UK, USA, Australia, and 76+ countries."
         keywords="healthcare practice, Pearson BTEC, healthcare management, nursing courses, global healthcare education"
       />
       <div className="max-w-7xl mx-auto px-6">
@@ -66,7 +66,7 @@ export default function Healthcare() {
                   {[1,2,3,4,5].map(i => <div key={i} className="w-6 h-1.5 bg-emerald-500 rounded-full" />)}
                 </div>
                 <div className="text-slate-900 font-bold mb-1">Global Recognition</div>
-                <div className="text-slate-500 text-sm">Valid in UK, USA, Australia, and 70+ countries.</div>
+                <div className="text-slate-500 text-sm">Valid in UK, USA, Australia, and 76+ countries.</div>
               </div>
             </div>
           </div>

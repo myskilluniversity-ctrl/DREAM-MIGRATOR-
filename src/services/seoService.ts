@@ -53,7 +53,7 @@ const DEFAULT_BLOGS: BlogPost[] = [
     ctaType: 'healthcare_counseling',
     keywords: 'Pearson BTEC Level 4, BTEC Level 5, Healthcare careers 2026, global healthcare vacancy, medical training germany',
     metaTitle: 'Pearson BTEC Level 4 & 5 Healthcare Career Guide (2026)',
-    metaDescription: 'Discover why Pearson BTEC Level 4 and Level 5 health certificates open career avenues across 70+ recognized countries, especially Germany, UK, and USA.',
+    metaDescription: 'Discover why Pearson BTEC Level 4 and Level 5 health certificates open career avenues across 76+ recognized countries, especially Germany, UK, and USA.',
     createdAt: '2026-05-18T10:00:00Z',
     content: `## Bridging the Global Healthcare Ingress Gap in 2026
 
@@ -72,7 +72,7 @@ Level 5 is analogous to a foundation medical degree or specialized associate deg
 For further details on how this fits your specific budget, visit our [International Cost Calculator](/cost-calculator) to compute your training and travel budgets, or use our [AI Career Counselor](/ai-counselor) to assess your clinical eligibility. For those interested in the German Ausbildung specifically, we have fully detailed our [German Ausbildung Intakes](/ausbildung) page for the second half of 2026.
 
 ### Essential Training Guidelines
-*   **70+ Countries:** Globally synchronized learning outcomes.
+*   **76+ Countries:** Globally synchronized learning outcomes.
 *   **No Prior Intensive Science Required:** Flexible pathway with dedicated core medical foundation modules.
 *   **Direct Hospital Attachments:** Practical assessments completed during live internships.`,
     schemaJson: `{
@@ -192,7 +192,7 @@ const DEFAULT_PAGES_META: PageMeta[] = [
   {
     path: '/',
     title: 'Bridge the Gap to Global Medical & Healthcare Careers',
-    description: 'Specialized Pearson BTEC Level 4 & Level 5 Healthcare training. Recognized in 70+ countries. Launch your career in Germany, UK, or USA with our expert guidance.',
+    description: 'Specialized Pearson BTEC Level 4 & Level 5 Healthcare training. Recognized in 76+ countries. Launch your career in Germany, UK, or USA with our expert guidance.',
     keywords: 'study abroad, BTEC level 4, BTEC level 5, healthcare training, global medical careers, German Ausbildung, nursing training',
     schemaType: 'Organization',
     schemaData: `{
@@ -225,7 +225,7 @@ const DEFAULT_PAGES_META: PageMeta[] = [
   "@context": "https://schema.org",
   "@type": "Course",
   "name": "Pearson BTEC Level 4 & Level 5 Professional Diploma in Healthcare",
-  "description": "Direct academic pathway for medical students to secure legal working status in 70+ countries through modular, outcome-focused qualifications.",
+  "description": "Direct academic pathway for medical students to secure legal working status in 76+ countries through modular, outcome-focused qualifications.",
   "provider": {
     "@type": "EducationalOrganization",
     "name": "Dream Migrator - BTEC Partner Network"
